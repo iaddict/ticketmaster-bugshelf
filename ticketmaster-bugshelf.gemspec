@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "ticketmaster-bugshelf"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files         = `hg manifest`.split("\n")
+  s.test_files    = []
+  s.executables   = []
   s.require_paths = ["lib"]
 end
