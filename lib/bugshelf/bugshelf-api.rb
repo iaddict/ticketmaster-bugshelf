@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'active_support'
 require 'active_resource'
 
@@ -10,7 +9,11 @@ module BugshelfAPI
     # Sets up basic authentication credentials for all the resources.
     def authenticate(subdomain, api_key)
       @subdomain = subdomain
-      self::Base.site = "https://#{api_key}:***@#{subdomain}.bugshelf.com/"
+
+      tld = ENV['RAILS_ENV'] == 'development' ? 'dev' : 'com'
+      schema = ENV['RAILS_ENV'] == 'development' ? 'http' : 'https'
+
+      self::Base.site = "#{schema}://#{api_key}:***@#{subdomain}.bugshelf.#{tld}/"
     end
 
     def resources
@@ -47,5 +50,6 @@ module BugshelfAPI
   end
 
   class Issue < Base
+    self.prefix = "/projects/:project_id/"
   end
 end

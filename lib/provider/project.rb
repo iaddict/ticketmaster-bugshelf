@@ -5,9 +5,11 @@ module TicketMaster::Provider
     #
     class Project < TicketMaster::Provider::Base::Project
       API = BugshelfAPI::Project # The class to access the api's projects
-      # declare needed overloaded methods here
-      
-      
+
+      def id
+        self[:project_key]
+      end
+
       # copy from this.copy(that) copies that into this
       def copy(project)
         project.tickets.each do |ticket|
@@ -17,10 +19,6 @@ module TicketMaster::Provider
             sleep 1
           end
         end
-      end
-
-      def id
-        self[:project_key]
       end
 
     end
