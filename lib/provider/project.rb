@@ -6,10 +6,6 @@ module TicketMaster::Provider
     class Project < TicketMaster::Provider::Base::Project
       API = BugshelfAPI::Project # The class to access the api's projects
 
-      def id
-        self[:project_key]
-      end
-
       # copy from this.copy(that) copies that into this
       def copy(project)
         project.tickets.each do |ticket|
