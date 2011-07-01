@@ -10,8 +10,9 @@ module BugshelfAPI
     def authenticate(subdomain, api_key)
       @subdomain = subdomain
 
-      tld = ENV['RAILS_ENV'] == 'development' ? 'dev' : 'com'
-      schema = ENV['RAILS_ENV'] == 'development' ? 'http' : 'https'
+      development = ENV['BUGS_ENV'] == 'development'
+      tld    = development ? 'dev'  : 'com'
+      schema = development ? 'http' : 'https'
 
       self::Base.site = "#{schema}://#{api_key}:***@#{subdomain}.bugshelf.#{tld}/"
     end
